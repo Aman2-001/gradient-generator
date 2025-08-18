@@ -1,120 +1,440 @@
-<html lang="eng">
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gradient Generator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Testimonial Carousel</title>
     </head>
     <style>
-        body{
-            font-family: sans-serif;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-content: center;
-            text-align: center;
-            background: linear-gradient(to right, #ff6ec4, #7873f5);
-            transition: background 0.5s ease;
-        }
-        .btn{
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        #myButton {
-            padding: 20px 50px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 600;
-            background-color: #ff6ec4;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        #myButton2 {
-            padding: 20px 50px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 600;
-            background-color: #7873f5;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        #myButton:hover {
-           background-color: #ffffff73;
-        }
-        #myButton2:hover {
-           background-color: #ffffff56;
-        }
-        h3{
-            color: #fff;
-            font-weight: 500;
-        }
-        .copyCode {
-            padding: 40px 20px;
-            text-align: center;
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            border-left: 5px solid #000000;
-            background-color: #ffffff25;
-            border-radius: 10px;
-            cursor: pointer;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        .carousel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .carousel-title {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .carousel-wrapper {
+            overflow: hidden;
+            position: relative;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: calc(300% + 60px); /* 3 columns + gaps */
+        }
+
+        .carousel-column {
+            flex: 1;
+            margin: 0 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-height: 600px;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6ec4, #7873f5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+
+        .user-info h4 {
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+
+        .user-info .location {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-content {
+            color: #444;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-text {
+            transition: all 0.4s ease;
+        }
+
+        .read-more-btn {
+            background: linear-gradient(135deg, #ff6ec4, #7873f5);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 110, 196, 0.3);
+        }
+
+        .read-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 110, 196, 0.4);
+        }
+
+        .stars {
+            color: #ffd700;
+            margin-top: 15px;
+            font-size: 1.2rem;
+        }
+
+        .expanded {
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .fade-gradient {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(transparent, rgba(255, 255, 255, 0.95));
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .fade-gradient.hidden {
+            opacity: 0;
+        }
+
+        /* Animation keyframes for smooth infinite scroll */
+        @keyframes scroll-column-1 {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        @keyframes scroll-column-2 {
+            0% { transform: translateY(-25%); }
+            100% { transform: translateY(-75%); }
+        }
+
+        @keyframes scroll-column-3 {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(-100%); }
+        }
+
+        .carousel-column:nth-child(1) {
+            animation: scroll-column-1 20s linear infinite;
+        }
+
+        .carousel-column:nth-child(2) {
+            animation: scroll-column-2 25s linear infinite;
+        }
+
+        .carousel-column:nth-child(3) {
+            animation: scroll-column-3 30s linear infinite;
+        }
+
+        .carousel-column:hover {
+            animation-play-state: paused;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .carousel-track {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .carousel-column {
+                margin: 10px 0;
+                animation: none !important;
+            }
+            
+            .carousel-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+        }
     </style>
     <body>
-        <section>
-            <div class="btn">
-                <button id="myButton">#ff6ec4</button>
-                <button id="myButton2">#7873f5</button>
+        <div class="carousel-container">
+            <h1 class="carousel-title">What Our Customers Say</h1>
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Column 1 -->
+                    <div class="carousel-column">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar">JR</div>
+                                <div class="user-info">
+                                    <h4>John Robertson</h4>
+                                    <div class="location">Austin, Texas</div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-text" data-full="Cerebrolysin cured 25 years of debilitating Social Anxiety. I don't want to write my life story here, so I will give the abridged version. I was a normal child until I hit puberty. Something happened when I was 12 that changed my life for the worse. I developed such strong social anxiety I dropped out of High School. Only worked from home for all of my life. Always had a job though. Turned into such an extreme alcoholic, so bad I developed Wernicke's encephalopathy. Had minimal dating in 25 years. Social Anxiety basically ruined my life.">
+                                    Cerebrolysin cured 25 years of debilitating Social Anxiety. I don't want to write my life story here, so I will give the abridged version. I was a normal child until I hit puberty. Something happened when I was 12...
+                                </div>
+                                <button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
+                                <div class="fade-gradient"></div>
+                            </div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar">SM</div>
+                                <div class="user-info">
+                                    <h4>Sarah Mitchell</h4>
+                                    <div class="location">New York, NY</div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-text" data-full="This product completely transformed my daily routine and gave me the confidence I never thought I could have. The results were visible within just a few weeks of consistent use. I've tried many similar products before, but nothing comes close to the effectiveness of this one. The customer service team was also incredibly helpful throughout my journey. I would highly recommend this to anyone looking for real, lasting change in their life.">
+                                    This product completely transformed my daily routine and gave me the confidence I never thought I could have. The results were visible within just a few weeks of consistent use...
+                                </div>
+                                <button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
+                                <div class="fade-gradient"></div>
+                            </div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar">DL</div>
+                                <div class="user-info">
+                                    <h4>David Lee</h4>
+                                    <div class="location">Los Angeles, CA</div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-text" data-full="Outstanding quality and exceptional service! I've been using this for over six months now and the improvements in my quality of life have been remarkable. The team behind this product clearly understands what their customers need. Fast shipping, great packaging, and most importantly, a product that actually works as advertised. I've already recommended it to several friends and family members.">
+                                    Outstanding quality and exceptional service! I've been using this for over six months now and the improvements in my quality of life have been remarkable. The team behind this product clearly understands...
+                                </div>
+                                <button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
+                                <div class="fade-gradient"></div>
+                            </div>
+                            <div class="stars">★★★★☆</div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="carousel-column">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar">EM</div>
+                                <div class="user-info">
+                                    <h4>Emily Chen</h4>
+                                    <div class="location">Seattle, WA</div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-text" data-full="I was skeptical at first, but after trying this product for three months, I can honestly say it has exceeded all my expectations. The gradual improvement was noticeable week by week, and now I feel like a completely different person. The support team was always available to answer my questions, and the community around this product is incredibly supportive. This isn't just a product, it's a lifestyle change.">
+                                    I was skeptical at first, but after trying this product for three months, I can honestly say it has exceeded all my expectations. The gradual improvement was noticeable week by week...
+                                </div>
+                                <button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
+                                <div class="fade-gradient"></div>
+                            </div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar">MJ</div>
+                                <div class="user-info">
+                                    <h4>Michael Johnson</h4>
+                                    <div class="location">Chicago, IL</div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-text" data-full="Absolutely amazing results! I've struggled with similar issues for years and tried countless solutions without success. This product not only delivered on its promises but exceeded them. The natural ingredients and scientific approach really make a difference. I feel more energetic, focused, and confident than I have in years. The investment was definitely worth it, and I plan to continue using it long-term.">
+                                    Absolutely amazing results! I've struggled with similar issues for years and tried countless solutions without success. This product not only delivered on its promises but exceeded them...
+                                </div>
+                                <button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
+                                <div class="fade-gradient"></div>
+                            </div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar">AL</div>
+                                <div class="user-info">
+                                    <h4>Anna Lopez</h4>
+                                    <div class="location">Miami, FL</div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-text" data-full="The customer service alone deserves five stars, but the product quality is what really sets this apart from competitors. I noticed improvements within the first month, and by month three, my friends were asking what I was doing differently. The ordering process was smooth, delivery was fast, and the product packaging shows real attention to detail. I'm a customer for life!">
+                                    The customer service alone deserves five stars, but the product quality is what really sets this apart from competitors. I noticed improvements within the first month...
+                                </div>
+                                <button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
+                                <div class="fade-gradient"></div>
+                            </div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+
+                    <!-- Column 3 -->
+                    <div class="carousel-column">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar">RT</div>
+                                <div class="user-info">
+                                    <h4>Robert Taylor</h4>
+                                    <div class="location">Denver, CO</div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-text" data-full="This has been a game-changer for me and my family. The positive effects started showing within two weeks, and now after four months, I can't imagine my life without it. The quality is consistent, the results are reliable, and the price point is fair for what you get. I've recommended it to my doctor, who was impressed with the research behind it. Truly a premium product that delivers premium results.">
+                                    This has been a game-changer for me and my family. The positive effects started showing within two weeks, and now after four months, I can't imagine my life without it...
+                                </div>
+                                <button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
+                                <div class="fade-gradient"></div>
+                            </div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar">LW</div>
+                                <div class="user-info">
+                                    <h4>Lisa Wang</h4>
+                                    <div class="location">San Francisco, CA</div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-text" data-full="I've been using this product for eight months now and the transformation has been incredible. Not only did it address my primary concerns, but I also noticed improvements in areas I didn't expect. The scientific backing gives me confidence in its safety and effectiveness. The company's commitment to quality and customer satisfaction is evident in every interaction. This is definitely a long-term solution, not a quick fix.">
+                                    I've been using this product for eight months now and the transformation has been incredible. Not only did it address my primary concerns, but I also noticed improvements...
+                                </div>
+                                <button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
+                                <div class="fade-gradient"></div>
+                            </div>
+                            <div class="stars">★★★★☆</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="avatar">KB</div>
+                                <div class="user-info">
+                                    <h4>Kevin Brown</h4>
+                                    <div class="location">Boston, MA</div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="testimonial-text" data-full="Exceptional product with outstanding results! After trying numerous alternatives over the years, this is the first one that actually delivered on its promises. The improvement in my daily life has been substantial, and I feel more confident and energetic than I have in decades. The ordering process was seamless, and the customer support team went above and beyond to ensure I had everything I needed for success.">
+                                    Exceptional product with outstanding results! After trying numerous alternatives over the years, this is the first one that actually delivered on its promises. The improvement in my daily life...
+                                </div>
+                                <button class="read-more-btn" onclick="toggleReadMore(this)">Read More</button>
+                                <div class="fade-gradient"></div>
+                            </div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <h3>Click to copy the color</h3>
-                <div class="copyCode">background-image: linear-gradient(to right, rgba(0, 32, 92, 1), rgba(0, 0, 0, 0)); </div>
-            </div>
-        </section>
+        </div>
 
         <script>
-            const btn1 = document.getElementById('myButton');
-            const btn2 = document.getElementById('myButton2');
-            const copyDiv = document.querySelector('.copyCode');
-            let rgb1 = '#ff6ec4';
-            let rgb2 = '#7873f5';
-
-            const hexValues = () => {
-                let myHexvalues = '0123456789abcdef';
-                let colors = '#';
-                for(let i=0; i<6; i++){
-                  colors = colors +  myHexvalues[Math.floor(Math.random()*16)];
-                  
+            function toggleReadMore(button) {
+                const testimonialText = button.previousElementSibling;
+                const fadeGradient = button.nextElementSibling;
+                const card = button.closest('.testimonial-card');
+                const fullText = testimonialText.getAttribute('data-full');
+                const isExpanded = card.classList.contains('expanded');
+                
+                if (isExpanded) {
+                    // Collapse
+                    const words = fullText.split(' ');
+                    const shortText = words.slice(0, 20).join(' ') + '...';
+                    testimonialText.textContent = shortText;
+                    button.textContent = 'Read More';
+                    card.classList.remove('expanded');
+                    fadeGradient.classList.remove('hidden');
+                } else {
+                    // Expand
+                    testimonialText.textContent = fullText;
+                    button.textContent = 'Read Less';
+                    card.classList.add('expanded');
+                    fadeGradient.classList.add('hidden');
                 }
-                return colors;
-            };
-
-            const handleButton1 = () => {
-                rgb1 = hexValues();
-                btn1.innerText = rgb1;
-                document.getElementById('myButton').style.backgroundColor = rgb1;
-                document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, #fff)`;
-                copyDiv.innerHTML = `background-image: linear-gradient(to right, ${rgb1}, ${rgb2})`;
-            }
-             const handleButton2 = () => {
-                rgb2 = hexValues();
-                btn2.innerText = rgb2;
-                 document.getElementById('myButton2').style.backgroundColor = rgb2;
-                document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, ${rgb2})`;
-                copyDiv.innerHTML = `background-image: linear-gradient(to right, ${rgb1}, ${rgb2})`;   
             }
 
-            btn1.addEventListener('click', handleButton1);
-            btn2.addEventListener('click', handleButton2);
+            // Initialize short text for all testimonials
+            document.addEventListener('DOMContentLoaded', function() {
+                const testimonialTexts = document.querySelectorAll('.testimonial-text');
+                testimonialTexts.forEach(text => {
+                    const fullText = text.getAttribute('data-full');
+                    const words = fullText.split(' ');
+                    const shortText = words.slice(0, 20).join(' ') + '...';
+                    text.textContent = shortText;
+                });
+            });
 
-            copyDiv.addEventListener('click', () => {
-                navigator.clipboard.writeText(copyDiv.innerText)
-                console.log(alert("CSS Copied"))
-            })
+            // Pause animation on hover for better UX
+            const columns = document.querySelectorAll('.carousel-column');
+            columns.forEach(column => {
+                column.addEventListener('mouseenter', () => {
+                    column.style.animationPlayState = 'paused';
+                });
+                
+                column.addEventListener('mouseleave', () => {
+                    column.style.animationPlayState = 'running';
+                });
+            });
         </script>
     </body>
 </html>
