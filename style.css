@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    background: #000;
+}
+
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#autoVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Hide any default controls */
+    outline: none;
+}
+
+/* Ensure no controls are visible */
+#autoVideo::-webkit-media-controls {
+    display: none !important;
+}
+
+#autoVideo::-webkit-media-controls-panel {
+    display: none !important;
+}
+
+#autoVideo::-webkit-media-controls-play-button {
+    display: none !important;
+}
+
+#autoVideo::-webkit-media-controls-start-playback-button {
+    display: none !important;
+}
+
+#autoVideo::-webkit-media-controls-timeline {
+    display: none !important;
+}
+
+#autoVideo::-webkit-media-controls-current-time-display {
+    display: none !important;
+}
+
+#autoVideo::-webkit-media-controls-time-remaining-display {
+    display: none !important;
+}
+
+#autoVideo::-webkit-media-controls-mute-button {
+    display: none !important;
+}
+
+#autoVideo::-webkit-media-controls-volume-slider {
+    display: none !important;
+}
+
+#autoVideo::-webkit-media-controls-fullscreen-button {
+    display: none !important;
+}
